@@ -4,7 +4,7 @@
     <h1>Crear cuenta</h1>
     <p>Completá tus datos para unirte a la red social.</p>
 
-    <form (ngSubmit)="mostrarDatos()">
+    <form (ngSubmit)="registrar()">
 
       <div class="form-group">
         <label for="nombre">Nombre</label>
@@ -14,6 +14,7 @@
           name="nombre"
           [(ngModel)]="nombre"
           placeholder="Ingresá tu nombre"
+          required
         />
       </div>
 
@@ -25,6 +26,7 @@
           name="apellido"
           [(ngModel)]="apellido"
           placeholder="Ingresá tu apellido"
+          required
         />
       </div>
 
@@ -36,6 +38,7 @@
           name="email"
           [(ngModel)]="email"
           placeholder="ejemplo@correo.com"
+          required
         />
       </div>
 
@@ -47,6 +50,9 @@
           name="username"
           [(ngModel)]="username"
           placeholder="Elegí un nombre de usuario"
+          minlength="3"
+          maxlength="20"
+          required
         />
       </div>
 
@@ -58,6 +64,9 @@
           name="password"
           [(ngModel)]="password"
           placeholder="Mínimo 8 caracteres"
+          minlength="8"
+          pattern="(?=.*[A-Z])(?=.*[0-9]).+"
+          required
         />
       </div>
 
@@ -69,6 +78,7 @@
           name="confirmarPassword"
           [(ngModel)]="confirmarPassword"
           placeholder="Repetí tu contraseña"
+          required
         />
       </div>
 
@@ -79,6 +89,7 @@
           id="fechaNacimiento"
           name="fechaNacimiento"
           [(ngModel)]="fechaNacimiento"
+          required
         />
       </div>
 
@@ -94,16 +105,27 @@
       </div>
 
       <div class="form-group">
-        <label for="foto">Foto de perfil</label>
+        <label for="fotoPerfil">Foto de perfil</label>
         <input
           type="file"
-          id="foto"
-          name="foto"
-          accept="image/*"
+          id="fotoPerfil"
+          name="fotoPerfil"
+          accept="image/jpeg,image/png,image/webp"
+          (change)="seleccionarFoto($event)"
         />
       </div>
 
-      <button type="submit">Registrarme</button>
+      <p *ngIf="mensajeError" class="mensaje-error">
+        {{ mensajeError }}
+      </p>
+
+      <p *ngIf="mensajeExito" class="mensaje-exito">
+        {{ mensajeExito }}
+      </p>
+
+      <button type="submit" [disabled]="registrando">
+        {{ registrando ? 'Registrando...' : 'Registrarme' }}
+      </button>
 
     </form>
 

@@ -1,1 +1,56 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-card">
+
+    <h1>Iniciar sesión</h1>
+
+    <p>Ingresá tus datos para continuar.</p>
+
+    <form (ngSubmit)="iniciarSesion()">
+
+      <div class="form-group">
+        <label for="identificador">Email o nombre de usuario</label>
+
+        <input
+          type="text"
+          id="identificador"
+          name="identificador"
+          [(ngModel)]="identificador"
+          placeholder="Ingresá tu email o username"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Ingresá tu contraseña"
+          required
+        />
+      </div>
+
+      <p *ngIf="mensajeError" class="mensaje-error">
+        {{ mensajeError }}
+      </p>
+
+      <p *ngIf="mensajeExito" class="mensaje-exito">
+        {{ mensajeExito }}
+      </p>
+
+      <button type="submit" [disabled]="ingresando">
+        {{ ingresando ? 'Ingresando...' : 'Iniciar sesión' }}
+      </button>
+
+    </form>
+
+    <p class="registro-link">
+      ¿Todavía no tenés cuenta?
+      <a routerLink="/registro">Registrate</a>
+    </p>
+
+  </div>
+</div>

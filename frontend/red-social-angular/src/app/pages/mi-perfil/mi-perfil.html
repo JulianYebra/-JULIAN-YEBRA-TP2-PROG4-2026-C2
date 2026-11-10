@@ -1,1 +1,47 @@
-<p>mi-perfil works!</p>
+<div class="perfil-container">
+
+  <header class="encabezado">
+    <h1>Red Social</h1>
+
+    <nav>
+      <a routerLink="/publicaciones">Publicaciones</a>
+      <a routerLink="/mi-perfil">Mi perfil</a>
+    </nav>
+  </header>
+
+  <main class="contenido">
+
+    <h2>Mi perfil</h2>
+
+    @if (usuario) {
+      <section class="perfil-card">
+
+        <div class="foto-perfil">
+          @if (usuario.fotoPerfil) {
+            <img
+              [src]="'http://localhost:3000' + usuario.fotoPerfil"
+              alt="Foto de perfil"
+            />
+          } @else {
+            <span>Sin foto</span>
+          }
+        </div>
+
+        <div class="datos-perfil">
+          <h3>{{ usuario.nombre }} {{ usuario.apellido }}</h3>
+
+          <p><strong>Usuario:</strong> {{ usuario.username }}</p>
+
+          <p><strong>Email:</strong> {{ usuario.email }}</p>
+
+          <p><strong>Descripción:</strong> {{ usuario.descripcion || 'Sin descripción' }}</p>
+        </div>
+
+      </section>
+    } @else {
+      <p>No hay datos de usuario disponibles. Iniciá sesión nuevamente.</p>
+    }
+
+  </main>
+
+</div>

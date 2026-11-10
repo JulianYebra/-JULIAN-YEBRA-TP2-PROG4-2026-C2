@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-publicaciones',
-  styleUrl: './publicaciones.css',
+  imports: [RouterLink],
   templateUrl: './publicaciones.html',
+  styleUrl: './publicaciones.css'
 })
 export class Publicaciones {}

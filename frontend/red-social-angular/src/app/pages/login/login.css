@@ -1,0 +1,152 @@
+
+/* Contenedor principal */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #e9e8ff, #dff2ff, #f8e9f5);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tarjeta de inicio de sesión */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(76, 81, 130, 0.13);
+}
+
+/* Título */
+.login-card h1 {
+  margin: 0 0 12px;
+  color: #34345c;
+  font-size: 30px;
+  text-align: center;
+}
+
+/* Texto descriptivo */
+.login-card > p {
+  margin-bottom: 30px;
+  color: #77778f;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  margin-bottom: 9px;
+  color: #444461;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Campos de entrada */
+.form-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #dedeee;
+  border-radius: 10px;
+  outline: none;
+  background-color: #fafaff;
+  color: #34345c;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #aaaabd;
+}
+
+.form-group input:focus {
+  border-color: #8985dc;
+  box-shadow: 0 0 0 3px rgba(137, 133, 220, 0.15);
+}
+
+/* Botón de inicio de sesión */
+.login-card button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #8580d8, #6d9bd8);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.login-card button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(109, 125, 210, 0.3);
+}
+
+.login-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensajes */
+.mensaje-error {
+  padding: 11px;
+  border-radius: 8px;
+  background-color: #fff0f0;
+  color: #c34252;
+  font-size: 13px;
+  text-align: center;
+}
+
+.mensaje-exito {
+  padding: 11px;
+  border-radius: 8px;
+  background-color: #eaf9f0;
+  color: #278653;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Enlace al registro */
+.login-card .registro-link {
+  margin: 25px 0 0;
+  color: #77778f;
+  font-size: 14px;
+  text-align: center;
+}
+
+.registro-link a {
+  color: #7771cc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.registro-link a:hover {
+  color: #5751ad;
+  text-decoration: underline;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 28px 22px;
+  }
+
+  .login-card h1 {
+    font-size: 25px;
+  }
+}

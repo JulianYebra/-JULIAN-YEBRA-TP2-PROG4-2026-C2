@@ -1,0 +1,199 @@
+
+/* Contenedor principal */
+.registro-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #e9e8ff, #dff2ff, #f8e9f5);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tarjeta de registro */
+.registro-card {
+  width: 100%;
+  max-width: 580px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(76, 81, 130, 0.13);
+}
+
+/* Título */
+.registro-card h1 {
+  margin: 0 0 12px;
+  color: #34345c;
+  font-size: 30px;
+  text-align: center;
+}
+
+/* Descripción */
+.registro-card > p {
+  margin-bottom: 30px;
+  color: #77778f;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 19px;
+}
+
+.form-group label {
+  margin-bottom: 9px;
+  color: #444461;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Campos de texto */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #dedeee;
+  border-radius: 10px;
+  outline: none;
+  background-color: #fafaff;
+  color: #34345c;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #aaaabd;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #8985dc;
+  box-shadow: 0 0 0 3px rgba(137, 133, 220, 0.15);
+}
+
+/* Área de descripción */
+.form-group textarea {
+  resize: none;
+  min-height: 85px;
+}
+
+/* Selector de archivo */
+.form-group input[type="file"] {
+  padding: 11px;
+  cursor: pointer;
+  color: #77778f;
+}
+
+/* Botón */
+.registro-card button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #8580d8, #6d9bd8);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.registro-card button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(109, 125, 210, 0.3);
+}
+
+.registro-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensajes */
+.mensaje-error {
+  padding: 11px;
+  border-radius: 8px;
+  background-color: #fff0f0;
+  color: #c34252;
+  font-size: 13px;
+  text-align: center;
+}
+
+.mensaje-exito {
+  padding: 11px;
+  border-radius: 8px;
+  background-color: #eaf9f0;
+  color: #278653;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Enlace al login */
+.registro-card .login-link {
+  margin: 25px 0 0;
+  color: #77778f;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-link a {
+  color: #7771cc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  color: #5751ad;
+  text-decoration: underline;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+  .registro-container {
+    padding: 20px 12px;
+  }
+
+  .registro-card {
+    padding: 28px 20px;
+  }
+
+  .registro-card h1 {
+    font-size: 25px;
+  }
+}
+
+
+/* Selector de foto de perfil */
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #aaa5df;
+  border-radius: 10px;
+  background-color: #f8f7ff;
+  color: #77778f;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Botón interno para seleccionar archivo */
+.form-group input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8580d8, #6d9bd8);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+  opacity: 0.85;
+}

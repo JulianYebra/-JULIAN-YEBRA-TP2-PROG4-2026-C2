@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-mi-perfil',
-  styleUrl: './mi-perfil.css',
+  imports: [RouterLink],
   templateUrl: './mi-perfil.html',
+  styleUrl: './mi-perfil.css'
 })
-export class MiPerfil {}
+export class MiPerfil {
+
+  usuario: any = history.state.usuario ?? null;
+
+}
