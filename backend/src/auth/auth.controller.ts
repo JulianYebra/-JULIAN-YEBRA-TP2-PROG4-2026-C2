@@ -9,32 +9,26 @@ import {
 } from '@nestjs/common';
 
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
-import { randomUUID } from 'crypto';
+import { memoryStorage } from 'multer';
 
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Controller('auth')
 export class AuthController {
 
   constructor(
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly cloudinaryService: CloudinaryService
   ) {}
 
-  // Registrar usuarios y recibir su foto de perfil.
   @Post('register')
   @UseInterceptors(
     FileInterceptor('fotoPerfil', {
-      storage: diskStorage({
-        destination: './uploads/perfiles',
-        filename: (req, file, callback) => {
-          const nombreArchivo = `${randomUUID()}${extname(file.originalname)}`;
-          callback(null, nombreArchivo);
-        }
-      }),
+      storage: memoryStorage(),
+
       fileFilter: (req, file, callback) => {
         const tiposPermitidos = [
           'image/jpeg',
@@ -44,13 +38,16 @@ export class AuthController {
 
         if (!tiposPermitidos.includes(file.mimetype)) {
           return callback(
-            new BadRequestException('Solo se permiten imágenes JPG, PNG o WEBP'),
+            new BadRequestException(
+              'Solo se permiten imágenes JPG, PNG o WEBP'
+            ),
             false
           );
         }
 
         callback(null, true);
       },
+
       limits: {
         fileSize: 5 * 1024 * 1024
       }
@@ -60,14 +57,16 @@ export class AuthController {
     @Body() dto: CreateUserDto,
     @UploadedFile() archivo?: Express.Multer.File
   ) {
+
     if (archivo) {
-      dto.fotoPerfil = `/uploads/perfiles/${archivo.filename}`;
+      dto.fotoPerfil = await this.cloudinaryService.subirImagen(
+        archivo.buffer
+      );
     }
 
     return this.authService.registrar(dto);
   }
 
-  // Iniciar sesión.
   @Post('login')
   @HttpCode(200)
   async login(@Body() dto: LoginDto) {
