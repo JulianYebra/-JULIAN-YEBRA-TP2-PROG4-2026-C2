@@ -33,9 +33,11 @@
         />
       </div>
 
-      <p *ngIf="mensajeError" class="mensaje-error">
-        {{ mensajeError }}
-      </p>
+      @if (mensajeError) {
+        <p class="mensaje-error">
+          {{ mensajeError }}
+        </p>
+      }
 
       <p *ngIf="mensajeExito" class="mensaje-exito">
         {{ mensajeExito }}

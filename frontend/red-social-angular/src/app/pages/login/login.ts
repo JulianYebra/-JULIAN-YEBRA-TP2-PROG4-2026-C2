@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+
 import { Auth } from '../../services/auth';
 
 @Component({
@@ -21,9 +22,10 @@ export class Login {
   ingresando: boolean = false;
 
   constructor(
-  private readonly authService: Auth,
-  private readonly router: Router
-) {}
+    private readonly authService: Auth,
+    private readonly router: Router,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {}
 
   iniciarSesion(): void {
     this.mensajeError = '';
@@ -35,19 +37,32 @@ export class Login {
       identificador: this.identificador,
       password: this.password
     }).subscribe({
-     next: (respuesta) => {
-  this.mensajeExito = '¡Inicio de sesión exitoso!';
 
-  console.log('Usuario autenticado:', respuesta);
+      next: (respuesta) => {
+        this.mensajeExito = '¡Inicio de sesión exitoso!';
 
-  this.ingresando = false;
+        console.log('Usuario autenticado:', respuesta);
 
-  this.router.navigate(['/mi-perfil'], {
-    state: {
-      usuario: respuesta.usuario
-    }
-  });
-  },
+        this.ingresando = false;
+
+        this.router.navigate(['/mi-perfil'], {
+          state: {
+            usuario: respuesta.usuario
+          }
+        });
+      },
+
+      error: (error) => {
+        const mensaje = error.error?.message;
+
+        this.mensajeError = Array.isArray(mensaje)
+          ? mensaje.join(', ')
+          : mensaje || 'No se pudo iniciar sesión';
+
+        this.ingresando = false;
+        this.changeDetector.markForCheck();
+      }
+
     });
   }
 }

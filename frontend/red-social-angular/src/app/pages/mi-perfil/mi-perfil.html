@@ -19,7 +19,9 @@
         <div class="foto-perfil">
           @if (usuario.fotoPerfil) {
             <img
-              [src]="'http://localhost:3000' + usuario.fotoPerfil"
+              [src]="usuario.fotoPerfil.startsWith('http')
+                ? usuario.fotoPerfil
+                : 'http://localhost:3000' + usuario.fotoPerfil"
               alt="Foto de perfil"
             />
           } @else {

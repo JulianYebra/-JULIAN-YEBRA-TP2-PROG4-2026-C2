@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -29,7 +29,8 @@ export class Registro {
   registrando: boolean = false;
 
   constructor(
-    private readonly authService: Auth
+    private readonly authService: Auth,
+    private readonly changeDetector: ChangeDetectorRef
   ) {}
 
   // Obtener y validar la imagen seleccionada.
@@ -154,6 +155,7 @@ export class Registro {
         console.log('Usuario registrado:', respuesta);
 
         this.registrando = false;
+        this.changeDetector.markForCheck();
       },
 
       error: (error) => {
@@ -165,6 +167,7 @@ export class Registro {
           : mensaje || 'No se pudo completar el registro';
 
         this.registrando = false;
+        this.changeDetector.markForCheck();
       }
     });
   }

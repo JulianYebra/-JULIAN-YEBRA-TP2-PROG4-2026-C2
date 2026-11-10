@@ -100,14 +100,18 @@
 
 /* Mensajes */
 .mensaje-error {
-  padding: 11px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #f2caca;
   border-radius: 8px;
   background-color: #fff0f0;
   color: #c34252;
   font-size: 13px;
   text-align: center;
 }
-
 .mensaje-exito {
   padding: 11px;
   border-radius: 8px;
