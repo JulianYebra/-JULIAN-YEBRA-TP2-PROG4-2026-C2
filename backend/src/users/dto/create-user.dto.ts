@@ -4,25 +4,37 @@ import {
   IsNotEmpty,
   MinLength,
   MaxLength,
-  IsDateString,
+  IsDate,
   IsOptional,
-  Matches
+  Matches,
+  MaxDate
 } from 'class-validator';
+
+import { Transform, Type } from 'class-transformer';
 
 export class CreateUserDto {
 
+  @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
   @IsString()
   @IsNotEmpty()
+  @MinLength(3, {
+    message: 'El nombre debe tener al menos 3 caracteres'
+  })
   nombre: string;
 
+  @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
   @IsString()
   @IsNotEmpty()
+  @MinLength(3, {
+    message: 'El apellido debe tener al menos 3 caracteres'
+  })
   apellido: string;
 
   @IsEmail()
   email: string;
 
   @IsString()
+  @IsNotEmpty()
   @MinLength(3)
   @MaxLength(20)
   username: string;
@@ -35,10 +47,17 @@ export class CreateUserDto {
   password: string;
 
   @IsString()
+  @IsNotEmpty()
   confirmarPassword: string;
 
-  @IsDateString()
-  fechaNacimiento: string;
+  @Type(() => Date)
+  @IsDate({
+    message: 'Ingresá una fecha de nacimiento válida'
+  })
+  @MaxDate(new Date(), {
+    message: 'La fecha de nacimiento no puede ser futura'
+  })
+  fechaNacimiento: Date;
 
   @IsOptional()
   @IsString()

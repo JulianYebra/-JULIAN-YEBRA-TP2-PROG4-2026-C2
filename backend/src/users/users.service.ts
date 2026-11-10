@@ -21,16 +21,16 @@ export class UsersService {
 
   // Buscar un usuario por su email.
   async buscarPorEmail(email: string): Promise<UserDocument | null> {
-    return this.userModel.findOne({
-      email: email.toLowerCase()
-    }).exec();
+  return this.userModel.findOne({
+    email: email.toLowerCase()
+    }).select('+password').exec();
   }
 
   // Buscar un usuario por su username.
   async buscarPorUsername(username: string): Promise<UserDocument | null> {
-    return this.userModel.findOne({
-      username
-    }).exec();
+  return this.userModel.findOne({
+    username
+    }).select('+password').exec();
   }
 
   // Buscar un usuario por su ID.
