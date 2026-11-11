@@ -21,7 +21,7 @@ export class Registro {
   confirmarPassword: string = '';
   fechaNacimiento: string = '';
   descripcion: string = '';
-
+  perfil: string = 'usuario';
   fotoPerfil: File | null = null;
 
   mensajeError: string = '';
@@ -141,7 +141,7 @@ export class Registro {
     datos.append('confirmarPassword', this.confirmarPassword);
     datos.append('fechaNacimiento', this.fechaNacimiento);
     datos.append('descripcion', this.descripcion.trim());
-
+    datos.append('perfil', this.perfil);
     if (this.fotoPerfil) {
       datos.append('fotoPerfil', this.fotoPerfil);
     }
