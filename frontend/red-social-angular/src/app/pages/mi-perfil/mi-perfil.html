@@ -34,6 +34,11 @@
 
           <p><strong>Usuario:</strong> {{ usuario.username }}</p>
 
+          <p>
+            <strong>Tipo de perfil:</strong>
+            {{ usuario.perfil === 'administrador' ? 'Administrador' : 'Usuario' }}
+          </p>
+
           <p><strong>Email:</strong> {{ usuario.email }}</p>
 
           <p><strong>Descripción:</strong> {{ usuario.descripcion || 'Sin descripción' }}</p>
