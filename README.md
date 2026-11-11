@@ -1,57 +1,131 @@
-# Red Social – TP2 Programación 4
+# Red Social — TP2 Programación IV
 
-Aplicación web de una red social desarrollada como Trabajo Práctico N.º 2 de la materia **Programación 4**, utilizando Angular para el frontend y NestJS para el backend.
+**Alumno:** Julián Yebra  
+**Materia:** Programación IV — UTN  
+**Comisión:** 141  
+**Repositorio:** [GitHub — TP2 Red Social](https://github.com/JulianYebra/-JULIAN-YEBRA-TP2-PROG4-2026-C2)
 
-El proyecto permite registrar usuarios, iniciar sesión y acceder a las secciones principales de la aplicación.
+## Deploy
+
+- **Frontend (Vercel):** [Abrir Red Social](https://julian-yebra-tp-2-prog-4-2026-c2-ec257wz34-julian-yebra.vercel.app/login)
+- **Backend (Render):** [API Red Social](https://julian-yebra-tp2-prog4-2026-c2.onrender.com)
+
+## Descripción del proyecto
+
+Red Social es una aplicación web desarrollada con Angular, NestJS y MongoDB. Permite a los usuarios registrarse, iniciar sesión, consultar publicaciones y gestionar su perfil personal.
+
+El proyecto está organizado en dos aplicaciones independientes: un frontend encargado de la interfaz y la navegación, y un backend responsable de la lógica de negocio, autenticación y persistencia de datos.
 
 ## Tecnologías utilizadas
 
 ### Frontend
-- Angular 22.
-- TypeScript.
-- HTML5 y CSS3.
-- Angular Router para la navegación.
-- HttpClient para la comunicación con el backend.
+
+- **Angular 22:** framework utilizado para desarrollar la interfaz de usuario.
+- **TypeScript:** lenguaje utilizado para implementar la lógica de la aplicación.
+- **HTML:** estructura de las páginas.
+- **CSS:** estilos y diseño visual.
+- **Angular Router:** navegación entre las distintas pantallas.
+- **HttpClient:** comunicación con la API del backend.
+- **FormsModule:** vinculación y gestión de formularios.
 
 ### Backend
-- NestJS.
-- Node.js.
-- TypeScript.
-- MongoDB.
-- Mongoose.
-- Bcrypt para el cifrado de contraseñas.
-- Cloudinary para el almacenamiento de imágenes de perfil.
-- Class Validator para la validación de datos.
 
-### Servicios de despliegue
+- **NestJS:** framework de Node.js utilizado para desarrollar la API REST.
+- **Node.js:** entorno de ejecución del backend.
+- **MongoDB:** base de datos NoSQL utilizada para almacenar los usuarios y las publicaciones.
+- **Mongoose:** integración entre NestJS y MongoDB mediante esquemas y modelos.
+- **Bcrypt:** encriptación mediante hash de las contraseñas.
+- **class-validator:** validación de los datos recibidos por la API.
+- **class-transformer:** transformación de los datos recibidos.
+- **Cloudinary:** almacenamiento de imágenes de perfil.
+
+### Despliegue y herramientas
+
+- **Git y GitHub:** control de versiones y almacenamiento del código fuente.
 - **Vercel:** alojamiento del frontend.
 - **Render:** alojamiento del backend.
-- **MongoDB Atlas:** base de datos en la nube.
-- **Cloudinary:** almacenamiento de imágenes.
+- **MongoDB Atlas:** alojamiento de la base de datos.
 
-## Aplicación desplegada
+## Funcionalidades por sprint
 
-- **Frontend:** https://julian-yebra-tp-2-prog-4-2026-c2-ec257wz34-julian-yebra.vercel.app/login
-- **Backend:** https://julian-yebra-tp2-prog4-2026-c2.onrender.com
+### Sprint 1 — Registro, Login y Mi Perfil
 
-## Funcionalidades del Sprint 1
+**Estado: implementado.**
 
-- Registro de nuevos usuarios.
-- Validación de los datos ingresados durante el registro.
-- Validación de email y nombre de usuario únicos.
-- Validación de contraseña con un mínimo de 8 caracteres, una mayúscula y un número.
-- Confirmación de contraseña.
-- Carga de imagen de perfil.
-- Almacenamiento de imágenes mediante Cloudinary.
-- Almacenamiento de usuarios en MongoDB Atlas.
-- Cifrado de contraseñas mediante Bcrypt.
-- Inicio de sesión mediante email o nombre de usuario.
-- Navegación entre las secciones principales de la aplicación.
-- Interfaz adaptable y validaciones visuales de formularios.
+- Creación de los proyectos frontend y backend.
+- Pantallas de Registro, Login, Publicaciones y Mi Perfil.
+- Navegación entre las pantallas.
+- Favicon personalizado.
+- Registro de usuarios con nombre, apellido, correo, username, contraseña, fecha de nacimiento, descripción e imagen de perfil.
+- Validaciones de los datos ingresados.
+- Verificación de contraseñas coincidentes.
+- Comprobación de correo y username únicos.
+- Contraseñas almacenadas mediante hash con Bcrypt.
+- Imágenes de perfil almacenadas en Cloudinary y URL guardada en MongoDB.
+- Atributo `perfil` con valor predeterminado `usuario` y posibilidad de seleccionar `administrador`.
+- Inicio de sesión mediante correo electrónico o nombre de usuario.
+- Visualización de los datos personales y del tipo de perfil en Mi Perfil.
+- API REST desarrollada con NestJS.
+- Persistencia de datos mediante MongoDB Atlas.
+- Despliegue del frontend y backend.
+
+### Sprint 2 — Publicaciones y Me gusta
+
+**Pendiente de implementación.**
+
+- Listado de publicaciones ordenadas por fecha o cantidad de Me gusta.
+- Paginación de publicaciones.
+- Creación de publicaciones con título, descripción e imagen opcional.
+- Dar y quitar Me gusta.
+- Eliminación de publicaciones propias.
+- Visualización de las últimas tres publicaciones y sus comentarios en Mi Perfil.
+- Desarrollo del controlador de publicaciones en NestJS.
+
+### Sprint 3 — Comentarios y manejo de sesiones
+
+**Pendiente de implementación.**
+
+- Vista de detalle de una publicación.
+- Creación y edición de comentarios propios.
+- Paginación de comentarios y opción de cargar más.
+- Implementación de JWT para autenticación.
+- Almacenamiento y validación de tokens.
+- Renovación de tokens.
+- Control de duración de sesión y aviso antes del vencimiento.
+- Protección de rutas mediante autenticación.
+
+### Sprint 4 — Administración y estadísticas
+
+**Pendiente de implementación.**
+
+- Baja lógica de publicaciones para administradores.
+- Dashboard de administración de usuarios.
+- Alta, baja y rehabilitación de usuarios.
+- Dashboard de estadísticas con gráficos.
+- Implementación de PWA.
+- Desarrollo de tres pipes y tres directivas personalizadas.
+
+### Sprint 5 — Recuperatorio
+
+**Pendiente de implementación.**
+
+- Visualización de perfiles de otros usuarios.
+- Scroll infinito en publicaciones.
+- Estadísticas de ingresos, visitas a perfiles y Me gusta por día.
+
+### Sprint 6 — Funcionalidades adicionales
+
+**Pendiente de implementación.**
+
+- Guardar y quitar publicaciones de guardados.
+- Pantalla para consultar publicaciones guardadas.
+- Compartir publicaciones con otros usuarios.
+- Pantalla de publicaciones compartidas.
+- Nuevos criterios de ordenamiento por cantidad de veces guardadas y compartidas.
 
 ## Arquitectura del proyecto
 
-El proyecto está organizado en dos partes principales:
+El repositorio contiene dos aplicaciones independientes:
 
 ```text
 Red social/
@@ -60,49 +134,44 @@ Red social/
 │   └── red-social-angular/
 │       └── src/
 │           └── app/
-│               ├── components/
+│               ├── pages/
 │               ├── services/
 │               └── ...
 │
 ├── backend/
-│   └── src/
-│       ├── auth/
-│       ├── users/
-│       ├── publications/
-│       ├── cloudinary/
-│       ├── app.module.ts
-│       └── main.ts
+│   ├── src/
+│   │   ├── auth/
+│   │   ├── cloudinary/
+│   │   ├── users/
+│   │   ├── publicaciones/
+│   │   ├── app.module.ts
+│   │   └── main.ts
+│   ├── package.json
+│   └── .env.example
 │
-├── spec.md
 └── README.md
 ```
 
 ### Frontend
 
-Desarrollado con Angular. Se encarga de mostrar la interfaz, gestionar los formularios y comunicarse con el backend mediante solicitudes HTTP.
+La carpeta `pages` contiene las pantallas principales de la aplicación. La carpeta `services` contiene los servicios encargados de comunicarse con el backend.
 
 ### Backend
 
-Desarrollado con NestJS y organizado mediante módulos:
+El backend está organizado en módulos, siguiendo la estructura de NestJS:
 
 - **Auth:** registro e inicio de sesión.
 - **Users:** gestión y persistencia de usuarios.
-- **Publications:** módulo correspondiente a las publicaciones.
-- **Cloudinary:** servicio para subir y almacenar imágenes.
-
-### Base de datos
-
-Se utiliza MongoDB Atlas como base de datos en la nube. La colección `users` almacena la información de los usuarios registrados.
+- **Publicaciones:** módulo destinado a las funcionalidades de publicaciones.
 
 ## Instalación y ejecución local
 
 ### Requisitos previos
 
-- Node.js.
-- npm.
+- Node.js y npm.
 - Angular CLI.
-- Una cuenta y una base de datos configurada en MongoDB Atlas.
-- Una cuenta de Cloudinary.
+- Una cuenta y base de datos configurada en MongoDB Atlas.
+- Credenciales de Cloudinary para el almacenamiento de imágenes.
 
 ### 1. Clonar el repositorio
 
@@ -113,19 +182,12 @@ cd -JULIAN-YEBRA-TP2-PROG4-2026-C2
 
 ### 2. Configurar el backend
 
-Ingresar a la carpeta:
-
 ```bash
 cd backend
-```
-
-Instalar las dependencias:
-
-```bash
 npm install
 ```
 
-Crear un archivo `.env` dentro de la carpeta `backend` con las siguientes variables:
+Crear un archivo `.env` dentro de `backend` con las siguientes variables:
 
 ```env
 MONGODB_URI=tu_uri_de_mongodb
@@ -147,23 +209,16 @@ El backend estará disponible en:
 
 ### 3. Configurar el frontend
 
-Abrir otra terminal e ingresar a:
+Abrir otra terminal:
 
 ```bash
 cd frontend/red-social-angular
-```
-
-Instalar las dependencias:
-
-```bash
 npm install
 ```
 
-Para ejecutar el frontend localmente, configurar la URL de la API del servicio de autenticación para que apunte al backend local:
+Configurar la URL de la API para que apunte al backend local:
 
-```text
-http://localhost:3000/auth
-```
+`http://localhost:3000/auth`
 
 Iniciar Angular:
 
@@ -171,20 +226,18 @@ Iniciar Angular:
 ng serve
 ```
 
-La aplicación estará disponible en:
+El frontend estará disponible en:
 
 `http://localhost:4200`
 
-## Seguridad
+## Variables de entorno y seguridad
 
-- Las contraseñas se almacenan utilizando Bcrypt.
-- Las credenciales y claves de servicios externos se configuran mediante variables de entorno.
-- El archivo `.env` no debe subirse al repositorio.
-- Las imágenes de perfil se almacenan en Cloudinary y se guarda su URL en MongoDB.
+Las credenciales de MongoDB y Cloudinary se configuran mediante variables de entorno. No deben incluirse valores reales en el repositorio ni compartirse públicamente.
+
+El archivo `.env` debe permanecer excluido del control de versiones. Se incluye `.env.example` como referencia para conocer las variables necesarias.
 
 ## Autor
 
-**Julián Yebra**
-
-Trabajo Práctico N.º 2 – Programación 4.
-
+**Julián Yebra**  
+Trabajo Práctico N.º 2 — Programación IV  
+UTN
