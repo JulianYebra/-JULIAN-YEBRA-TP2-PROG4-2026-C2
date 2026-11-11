@@ -46,7 +46,7 @@ export class AuthService {
       apellido: usuario.apellido,
       email: usuario.email,
       username: usuario.username,
-      rol: usuario.rol,
+      perfil: usuario.perfil,
       descripcion: usuario.descripcion,
       fotoPerfil: usuario.fotoPerfil
     }

@@ -30,8 +30,8 @@ export class User {
   @Prop()
   fotoPerfil: string;
 
-  @Prop({ enum: ['user', 'admin'], default: 'user' })
-  rol: string;
+  @Prop({ enum: ['usuario', 'administrador'], default: 'usuario' })
+  perfil: string;
 
   @Prop({ default: true })
   activo: boolean;

@@ -73,7 +73,7 @@ export class UsersService {
       fechaNacimiento: new Date(dto.fechaNacimiento),
       descripcion: dto.descripcion,
       fotoPerfil: dto.fotoPerfil,
-      rol: 'user',
+      perfil: dto.perfil || 'usuario',
       activo: true
     });
 
