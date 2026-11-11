@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class Auth {
 
-  private readonly apiUrl = 'http://localhost:3000/auth';
+  private readonly apiUrl = 'https://julian-yebra-tp2-prog4-2026-c2.onrender.com/auth';
 
   constructor(
     private readonly http: HttpClient
