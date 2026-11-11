@@ -7,8 +7,13 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  const origenesPermitidos = [
+  'http://localhost:4200',
+  process.env.FRONTEND_URL
+  ].filter((origen): origen is string => Boolean(origen));
+
   app.enableCors({
-  origin: 'http://localhost:4200'
+    origin: origenesPermitidos
   });
 
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
