@@ -7,7 +7,7 @@
 
 ## Deploy
 
-- **Frontend (Vercel):** [Abrir Red Social](julian-yebra-tp-2-prog-4-2026-c2.vercel.app)
+**Frontend (Vercel):** [Abrir Red Social](https://julian-yebra-tp-2-prog-4-2026-c2.vercel.app/)
 - **Backend (Render):** [API Red Social](https://julian-yebra-tp2-prog4-2026-c2.onrender.com)
 
 ## Descripción del proyecto
