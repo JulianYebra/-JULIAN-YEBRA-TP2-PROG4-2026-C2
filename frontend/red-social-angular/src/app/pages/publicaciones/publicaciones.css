@@ -108,3 +108,242 @@ nav a:hover {
     padding: 35px 20px;
   }
 }
+
+
+/* Contenedor general */
+.publicaciones-container {
+  min-height: 100vh;
+  background: #f4f7fc;
+  color: #263449;
+}
+
+/* Contenido principal */
+.contenido {
+  width: 90%;
+  max-width: 850px;
+  margin: 35px auto;
+}
+
+.contenido h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #243b5a;
+}
+
+.contenido > p {
+  color: #718096;
+  margin-bottom: 30px;
+}
+
+/* Formulario de publicación */
+.formulario-publicacion {
+  background: #ffffff;
+  padding: 25px;
+  margin-bottom: 35px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(40, 60, 90, 0.08);
+  border: 1px solid #e5ebf4;
+}
+
+.formulario-publicacion h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #29496f;
+  font-size: 21px;
+}
+
+.formulario-publicacion form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formulario-publicacion label {
+  font-weight: 600;
+  color: #435570;
+}
+
+.formulario-publicacion input,
+.formulario-publicacion textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #d8e1ed;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  background: #fbfcff;
+  color: #263449;
+}
+
+.formulario-publicacion input:focus,
+.formulario-publicacion textarea:focus {
+  outline: none;
+  border-color: #7da9dc;
+  box-shadow: 0 0 0 3px rgba(125, 169, 220, 0.15);
+}
+
+.formulario-publicacion textarea {
+  width: 100%;
+  min-height: 100px;
+  max-height: 180px;
+  resize: vertical;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Botones */
+.formulario-publicacion button,
+.publicacion button {
+  border: none;
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.formulario-publicacion button {
+  background: #527fb5;
+  color: white;
+  margin-top: 8px;
+}
+
+.formulario-publicacion button:hover {
+  background: #3e689b;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Tarjetas de publicaciones */
+.publicacion {
+  background: #ffffff;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 16px;
+  border: 1px solid #e5ebf4;
+  box-shadow: 0 4px 16px rgba(40, 60, 90, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.publicacion:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(40, 60, 90, 0.12);
+}
+
+.publicacion h3 {
+  margin: 0 0 12px;
+  color: #29496f;
+  font-size: 21px;
+}
+
+.publicacion p {
+  color: #596a80;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.publicacion img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  background: #f4f7fc;
+  border-radius: 12px;
+  margin: 15px 0;
+}
+
+/* Botón eliminar */
+.publicacion button {
+  background: #fff0f0;
+  color: #c04d58;
+  margin-top: 12px;
+}
+
+.publicacion button:hover {
+  background: #fbdada;
+}
+
+/* Mensaje cuando no hay publicaciones */
+.mensaje-vacio {
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed #cbd8e8;
+  border-radius: 16px;
+  padding: 35px 20px;
+  color: #718096;
+}
+
+.mensaje-vacio h3 {
+  color: #3d5879;
+  margin-top: 0;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+  .contenido {
+    width: 92%;
+    margin: 22px auto;
+  }
+
+  .contenido h2 {
+    font-size: 25px;
+  }
+
+  .formulario-publicacion,
+  .publicacion {
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+
+  .publicacion img {
+    max-height: 300px;
+  }
+}
+
+/* Confirmación de eliminación */
+.confirmacion-eliminar {
+  margin-top: 18px;
+  padding: 18px;
+  background: #fff7f7;
+  border: 1px solid #f2d0d0;
+  border-radius: 12px;
+}
+
+.confirmacion-eliminar p {
+  color: #87464c;
+  font-weight: 600;
+  margin: 0 0 15px;
+}
+
+.acciones-confirmacion {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.acciones-confirmacion .btn-confirmar {
+  background: #c94f5b;
+  color: white;
+}
+
+.acciones-confirmacion .btn-confirmar:hover {
+  background: #a83d49;
+}
+
+.acciones-confirmacion .btn-cancelar {
+  background: #e8edf4;
+  color: #435570;
+}
+
+.acciones-confirmacion .btn-cancelar:hover {
+  background: #d8e0eb;
+}

@@ -1,3 +1,4 @@
+
 <div class="publicaciones-container">
 
   <header class="encabezado">
@@ -15,10 +16,120 @@
 
     <p>¡Bienvenido a nuestra red social!</p>
 
-    <div class="mensaje-vacio">
-      <h3> todavía no hay publicaciones</h3>
-      <p>Cuando haya publicaciones disponibles, aparecerán acá.</p>
+
+@if (usuario) {
+  <section class="formulario-publicacion">
+
+    <h3>Crear publicación</h3>
+
+    <form (ngSubmit)="crearPublicacion()">
+
+      <label for="titulo">Título</label>
+      <input
+        type="text"
+        id="titulo"
+        name="titulo"
+        [(ngModel)]="titulo"
+        placeholder="Escribí un título..."
+        maxlength="100"
+        required
+      >
+
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        name="descripcion"
+        [(ngModel)]="descripcion"
+        placeholder="¿Qué querés compartir?"
+        maxlength="2000"
+        rows="4"
+        required
+      ></textarea>
+
+      <label for="imagen">Imagen (opcional)</label>
+      <input
+        type="file"
+        id="imagen"
+        accept="image/jpeg,image/png,image/webp"
+        (change)="seleccionarImagen($event)"
+      >
+
+      <button type="submit" [disabled]="publicando">
+        {{ publicando ? 'Publicando...' : 'Publicar' }}
+      </button>
+
+    </form>
+
+  </section>
+}
+
+    
+    @if (cargando) {
+      <p>Cargando publicaciones...</p>
+    } @else if (error) {
+      <p>{{ error }}</p>
+    } @else if (publicaciones.length === 0) {
+      <div class="mensaje-vacio">
+        <h3>Todavía no hay publicaciones</h3>
+        <p>Cuando haya publicaciones disponibles, aparecerán acá.</p>
+      </div>
+    } @else {
+      @for (publicacion of publicaciones; track publicacion._id) {
+        
+      <article class="publicacion">
+        <h3>{{ publicacion.titulo }}</h3>
+        <p>{{ publicacion.descripcion }}</p>
+
+        @if (publicacion.imagen) {
+          <img
+            [src]="publicacion.imagen"
+            alt="Imagen de la publicación"
+          >
+        }
+
+        @if (
+          usuario &&
+          (usuario.id === (publicacion.autor?._id ?? publicacion.autor?.id) ||
+          usuario.perfil === 'administrador')
+        ) {
+          
+@if (publicacionAEliminar !== publicacion._id) {
+  <button
+    type="button"
+    class="btn-eliminar"
+    (click)="solicitarEliminar(publicacion)"
+  >
+    Eliminar publicación
+  </button>
+} @else {
+  <div class="confirmacion-eliminar">
+    <p>¿Estás seguro de que querés eliminar esta publicación?</p>
+
+    <div class="acciones-confirmacion">
+      <button
+        type="button"
+        class="btn-confirmar"
+        (click)="eliminarPublicacion(publicacion)"
+          >
+            Sí, eliminar
+          </button>
+
+          <button
+            type="button"
+            class="btn-cancelar"
+            (click)="cancelarEliminar()"
+          >
+          Cancelar
+      </button>
     </div>
+  </div>
+}
+
+        }
+      </article>
+
+      }
+    }
 
   </main>
 

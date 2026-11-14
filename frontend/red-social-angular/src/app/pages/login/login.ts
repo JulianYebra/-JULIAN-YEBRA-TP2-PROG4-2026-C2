@@ -39,17 +39,20 @@ export class Login {
     }).subscribe({
 
       next: (respuesta) => {
-        this.mensajeExito = '¡Inicio de sesión exitoso!';
+      this.mensajeExito = '¡Inicio de sesión exitoso!';
 
-        console.log('Usuario autenticado:', respuesta);
+      console.log('Usuario autenticado:', respuesta);
 
-        this.ingresando = false;
+      // Guardar los datos del usuario en el servicio Auth.
+      this.authService.guardarUsuario(respuesta.usuario);
 
-        this.router.navigate(['/mi-perfil'], {
-          state: {
-            usuario: respuesta.usuario
-          }
-        });
+      this.ingresando = false;
+
+      this.router.navigate(['/mi-perfil'], {
+        state: {
+          usuario: respuesta.usuario
+        }
+      });
       },
 
       error: (error) => {

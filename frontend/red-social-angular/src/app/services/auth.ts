@@ -9,11 +9,19 @@ export class Auth {
 
   private readonly apiUrl = 'https://julian-yebra-tp2-prog4-2026-c2.onrender.com/auth';
 
+  // Usuario que inició sesión.
+  usuarioActual: any = null;
+
   constructor(
     private readonly http: HttpClient
   ) {}
 
-  // Registrar un usuario.
+  // Guardar los datos del usuario.
+  guardarUsuario(usuario: any): void {
+    this.usuarioActual = usuario;
+  }
+
+
   registrar(datos: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, datos);
   }
