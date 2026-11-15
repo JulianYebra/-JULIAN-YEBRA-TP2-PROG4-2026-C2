@@ -158,3 +158,68 @@ nav a:hover {
     font-size: 21px;
   }
 }
+
+/* Sección de mis publicaciones */
+.mis-publicaciones {
+  margin-top: 35px;
+}
+
+.mis-publicaciones h3 {
+  color: #29496f;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* Tarjeta individual */
+.publicacion-perfil {
+  background: white;
+  padding: 22px;
+  margin-bottom: 20px;
+  border: 1px solid #e5ebf4;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(40, 60, 90, 0.07);
+}
+
+/* Título */
+.publicacion-perfil h4 {
+  color: #29496f;
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+/* Descripción */
+.publicacion-perfil p {
+  color: #596a80;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Imagen */
+.publicacion-perfil img {
+  display: block;
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background: #f4f7fc;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+/* Contador de Me gusta */
+.publicacion-perfil .likes-perfil {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+  .publicacion-perfil {
+    padding: 16px;
+  }
+
+  .publicacion-perfil img {
+    max-height: 280px;
+  }
+}

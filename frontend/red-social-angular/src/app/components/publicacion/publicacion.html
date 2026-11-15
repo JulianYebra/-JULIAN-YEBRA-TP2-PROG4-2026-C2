@@ -1,0 +1,89 @@
+<article class="publicacion">
+
+  <h3>{{ publicacion.titulo }}</h3>
+
+  <p>{{ publicacion.descripcion }}</p>
+
+  @if (publicacion.imagen) {
+    <img
+      [src]="publicacion.imagen"
+      alt="Imagen de la publicación"
+    >
+  }
+
+  <!-- Me gusta -->
+  @if (usuario) {
+
+    @if (yaDioLike) {
+      <button
+        type="button"
+        class="btn-like activo"
+        (click)="quitarLike.emit(publicacion)"
+      >
+        Ya no me gusta
+      </button>
+    } @else {
+      <button
+        type="button"
+        class="btn-like"
+        (click)="darLike.emit(publicacion)"
+      >
+        Me gusta
+      </button>
+    }
+
+  }
+
+  <p class="contador-likes">
+    {{ publicacion.likes?.length ?? 0 }}
+    Me gusta
+  </p>
+
+  <!-- Eliminar publicación -->
+  @if (
+    usuario &&
+    (usuario.id === (publicacion.autor?._id ?? publicacion.autor?.id) ||
+    usuario.perfil === 'administrador')
+  ) {
+
+    @if (!publicacionAEliminar) {
+      <button
+        type="button"
+        class="btn-eliminar"
+        (click)="publicacionAEliminar = true"
+      >
+        Eliminar publicación
+      </button>
+    } @else {
+
+      <div class="confirmacion-eliminar">
+
+        <p>¿Estás seguro de que querés eliminar esta publicación?</p>
+
+        <div class="acciones-confirmacion">
+
+          <button
+            type="button"
+            class="btn-confirmar"
+            (click)="confirmarEliminar()"
+          >
+            Sí, eliminar
+          </button>
+
+          <button
+            type="button"
+            class="btn-cancelar"
+            (click)="publicacionAEliminar = false"
+          >
+            Cancelar
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  }
+
+</article>
