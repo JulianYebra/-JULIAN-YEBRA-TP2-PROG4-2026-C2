@@ -4,6 +4,26 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type PublicationDocument = HydratedDocument<Publication>;
 
+@Schema()
+export class Comentario {
+
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'User',
+    required: true
+  })
+  autor: Types.ObjectId;
+
+  @Prop({ required: true, trim: true, maxlength: 500 })
+  texto: string;
+
+  @Prop({ default: Date.now })
+  createdAt: Date;
+}
+
+export const ComentarioSchema =
+  SchemaFactory.createForClass(Comentario);
+
 @Schema({ timestamps: true })
 export class Publication {
 
@@ -14,7 +34,7 @@ export class Publication {
   descripcion: string;
 
   @Prop({ type: String, default: null })
-imagen: string | null;
+  imagen: string | null;
 
   @Prop({
     type: Types.ObjectId,
@@ -28,6 +48,12 @@ imagen: string | null;
     default: []
   })
   likes: Types.ObjectId[];
+
+  @Prop({
+    type: [ComentarioSchema],
+    default: []
+  })
+  comentarios: Comentario[];
 
   @Prop({ default: true })
   activa: boolean;

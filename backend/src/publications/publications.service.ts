@@ -4,6 +4,7 @@ import { Model, Types } from 'mongoose';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import {Publication,PublicationDocument} from './publication.schema';
 import { UsersService } from '../users/users.service';
+import { CreateCommentDto } from './dto/create-comment.dto';
 
     @Injectable()
     export class PublicationsService {
@@ -69,19 +70,48 @@ import { UsersService } from '../users/users.service';
             $limit: limit
         },
         {
-            $lookup: {
-            from: 'users',
-            localField: 'autor',
-            foreignField: '_id',
-            as: 'autor'
+        $lookup: {
+          from: 'users',
+          localField: 'comentarios.autor',
+          foreignField: '_id',
+          as: 'autoresComentarios'
+        }
+      },
+      {
+        $addFields: {
+          comentarios: {
+            $map: {
+              input: { $ifNull: ['$comentarios', []] },
+              as: 'comentario',
+              in: {
+                $mergeObjects: [
+                  '$$comentario',
+                  {
+                    autor: {
+                      $arrayElemAt: [
+                        {
+                          $filter: {
+                            input: '$autoresComentarios',
+                            as: 'usuario',
+                            cond: {
+                              $eq: ['$$usuario._id', '$$comentario.autor']
+                            }
+                          }
+                        },
+                        0
+                      ]
+                    }
+                  }
+                ]
+              }
             }
-        },
-        {
-            $unwind: '$autor'
-        },
+          }
+        }
+      },
         {
             $project: {
-            'autor.password': 0
+            'autor.password': 0,
+            'autoresComentarios.password': 0
             }
         }
         ]);
@@ -197,5 +227,47 @@ import { UsersService } from '../users/users.service';
     };
   }
 
+  // Agregar un comentario a una publicación.
+async comentar(
+  publicacionId: string,
+  usuarioId: string,
+  dto: CreateCommentDto
+) {
+  if (
+    !Types.ObjectId.isValid(publicacionId) ||
+    !Types.ObjectId.isValid(usuarioId)
+  ) {
+    throw new NotFoundException('ID de publicación o usuario inválido');
+  }
+
+  const usuario = await this.usersService.buscarPorId(usuarioId);
+
+  if (!usuario || !usuario.activo) {
+    throw new NotFoundException('El usuario no existe o está inactivo');
+  }
+
+  const publicacion = await this.publicationModel.findOneAndUpdate(
+    {
+      _id: new Types.ObjectId(publicacionId),
+      activa: true
+    },
+    {
+      $push: {
+        comentarios: {
+          autor: new Types.ObjectId(usuarioId),
+          texto: dto.texto.trim(),
+          createdAt: new Date()
+        }
+      }
+    },
+    { new: true }
+  );
+
+  if (!publicacion) {
+    throw new NotFoundException('La publicación no existe');
+  }
+
+  return publicacion;
+}
 
 }
