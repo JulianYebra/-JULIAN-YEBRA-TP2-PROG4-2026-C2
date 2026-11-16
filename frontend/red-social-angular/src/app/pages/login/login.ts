@@ -5,6 +5,7 @@ import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { Auth } from '../../services/auth';
+import { esPasswordValida, MENSAJE_PASSWORD_INVALIDA } from '../../utils/validaciones';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,16 @@ export class Login {
   iniciarSesion(): void {
     this.mensajeError = '';
     this.mensajeExito = '';
+
+    if (!this.identificador.trim()) {
+      this.mensajeError = 'Ingresá tu usuario o email';
+      return;
+    }
+
+    if (!esPasswordValida(this.password)) {
+      this.mensajeError = MENSAJE_PASSWORD_INVALIDA;
+      return;
+    }
 
     this.ingresando = true;
 
