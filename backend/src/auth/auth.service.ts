@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { serializePublicUser } from '../users/serializers/public-user.serializer';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,10 @@ export class AuthService {
   // Registrar un usuario.
   async registrar(dto: CreateUserDto) {
     return this.usersService.crear(dto);
+  }
+
+  async validarRegistro(dto: CreateUserDto): Promise<void> {
+    return this.usersService.validarRegistro(dto);
   }
 
   // Iniciar sesión.
@@ -39,17 +44,8 @@ export class AuthService {
     }
 
     return {
-    mensaje: 'Inicio de sesión exitoso',
-    usuario: {
-      id: usuario._id.toString(),
-      nombre: usuario.nombre,
-      apellido: usuario.apellido,
-      email: usuario.email,
-      username: usuario.username,
-      perfil: usuario.perfil,
-      descripcion: usuario.descripcion,
-      fotoPerfil: usuario.fotoPerfil
-    }
-  };
+      mensaje: 'Inicio de sesión exitoso',
+      usuario: serializePublicUser(usuario)
+    };
   }
 }

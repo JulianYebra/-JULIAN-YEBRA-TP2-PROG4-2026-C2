@@ -58,6 +58,8 @@ export class AuthController {
     @UploadedFile() archivo?: Express.Multer.File
   ) {
 
+    await this.authService.validarRegistro(dto);
+
     if (archivo) {
       dto.fotoPerfil = await this.cloudinaryService.subirImagen(
         archivo.buffer
