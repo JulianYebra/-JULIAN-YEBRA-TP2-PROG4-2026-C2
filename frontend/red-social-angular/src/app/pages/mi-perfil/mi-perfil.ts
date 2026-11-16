@@ -2,10 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Publications } from '../../services/publications';
 import { Auth } from '../../services/auth';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-mi-perfil',
-  imports: [RouterLink],
+  imports: [RouterLink,FormsModule,DatePipe],
   templateUrl: './mi-perfil.html',
   styleUrl: './mi-perfil.css'
 })
@@ -18,6 +20,8 @@ export class MiPerfil implements OnInit {
   error = '';
   cargandoUsuario = false;
   errorUsuario = '';
+  comentariosTexto: { [id: string]: string } = {};
+  enviandoComentario: string | null = null;
 
   constructor(
     private readonly publicationsService: Publications,
@@ -82,5 +86,39 @@ export class MiPerfil implements OnInit {
       }
     });
   }
+
+comentar(publicacion: any): void {
+  const texto = this.comentariosTexto[publicacion._id]?.trim();
+
+  if (!texto) {
+    return;
+  }
+
+  if (!this.usuario?.id) {
+    this.error = 'Debés iniciar sesión para comentar.';
+    return;
+  }
+
+  this.enviandoComentario = publicacion._id;
+  this.error = '';
+
+  this.publicationsService.comentar(
+    publicacion._id,
+    this.usuario.id,
+    texto
+  ).subscribe({
+    next: () => {
+      this.comentariosTexto[publicacion._id] = '';
+      this.enviandoComentario = null;
+      this.cargarMisPublicaciones();
+    },
+    error: (error) => {
+      console.error('Error al comentar:', error);
+      this.error = 'No se pudo publicar el comentario.';
+      this.enviandoComentario = null;
+      this.cdr.detectChanges();
+    }
+  });
+}
 
 }

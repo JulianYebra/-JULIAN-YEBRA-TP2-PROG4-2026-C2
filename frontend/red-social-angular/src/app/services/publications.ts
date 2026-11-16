@@ -59,4 +59,14 @@ export class Publications {
     );
   }
 
+  comentar(
+    publicacionId: string,
+    usuarioId: string,
+    texto: string
+  ): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/${publicacionId}/comentarios/${usuarioId}`,
+      { texto }
+    );
+  }
 }

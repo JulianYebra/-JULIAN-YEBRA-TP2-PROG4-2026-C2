@@ -169,7 +169,7 @@ darLike(publicacion: any): void {
     this.error = 'Debés iniciar sesión para dar Me gusta.';
     return;
   }
-
+  
   this.publicationsService.darLike(
     publicacion._id,
     this.usuario.id
