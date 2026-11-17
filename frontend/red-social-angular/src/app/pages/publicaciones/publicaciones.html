@@ -15,10 +15,136 @@
 
     <p>¡Bienvenido a nuestra red social!</p>
 
-    <div class="mensaje-vacio">
-      <h3> todavía no hay publicaciones</h3>
-      <p>Cuando haya publicaciones disponibles, aparecerán acá.</p>
+    <div class="ordenamiento">
+
+    <label for="orden">Ordenar publicaciones:</label>
+
+    <select
+      id="orden"
+      name="orden"
+      [(ngModel)]="orden"
+      (change)="cargarPublicaciones()"
+    >
+      <option value="fecha">Más recientes</option>
+      <option value="likes">Más Me gusta</option>
+    </select>
+
     </div>
+
+    @if (usuario) {
+
+  <button
+    type="button"
+    class="btn-crear-publicacion"
+    (click)="mostrarFormulario = !mostrarFormulario"
+  >
+    {{ mostrarFormulario ? 'Cancelar publicación' : '+ Crear publicación' }}
+  </button>
+
+  @if (mostrarFormulario) {
+
+    <section class="formulario-publicacion">
+
+      <h3>Crear publicación</h3>
+
+      <form (ngSubmit)="crearPublicacion()">
+
+        <label for="titulo">Título</label>
+        <input
+          type="text"
+          id="titulo"
+          name="titulo"
+          [(ngModel)]="titulo"
+          placeholder="Escribí un título..."
+          maxlength="100"
+          required
+        >
+
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          name="descripcion"
+          [(ngModel)]="descripcion"
+          placeholder="¿Qué querés compartir?"
+          maxlength="2000"
+          rows="4"
+          required
+        ></textarea>
+
+        <label for="imagen">Imagen (opcional)</label>
+        <input
+          type="file"
+          id="imagen"
+          accept="image/jpeg,image/png,image/webp"
+          (change)="seleccionarImagen($event)"
+        >
+
+        <button type="submit" [disabled]="publicando">
+          {{ publicando ? 'Publicando...' : 'Publicar' }}
+        </button>
+
+      </form>
+
+    </section>
+
+  }
+
+}
+
+    @if (cargando) {
+
+  <p>Cargando publicaciones...</p>
+
+} @else if (error) {
+
+  <p>{{ error }}</p>
+
+} @else if (publicaciones.length === 0) {
+
+  <div class="mensaje-vacio">
+    <h3>Todavía no hay publicaciones</h3>
+    <p>Cuando haya publicaciones disponibles, aparecerán acá.</p>
+  </div>
+
+} @else {
+
+  @for (publicacion of publicaciones; track publicacion._id) {
+
+    <app-publicacion
+      [publicacion]="publicacion"
+      [usuario]="usuario"
+      (eliminar)="eliminarPublicacion($event)"
+      (darLike)="darLike($event)"
+      (quitarLike)="quitarLike($event)"
+    />
+
+  }
+
+  <div class="paginacion">
+
+    <button
+      type="button"
+      (click)="paginaAnterior()"
+      [disabled]="offset === 0"
+    >
+      Anterior
+    </button>
+
+    <span>
+      Página {{ (offset / limite) + 1 }}
+    </span>
+
+    <button
+      type="button"
+      (click)="paginaSiguiente()"
+      [disabled]="publicaciones.length < limite"
+    >
+      Siguiente
+    </button>
+
+  </div>
+
+}
 
   </main>
 

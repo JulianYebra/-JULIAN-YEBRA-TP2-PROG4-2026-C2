@@ -10,6 +10,7 @@ import * as bcrypt from 'bcrypt';
 
 import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
+import { serializePublicUser } from './serializers/public-user.serializer';
 
 @Injectable()
 export class UsersService {
@@ -38,9 +39,7 @@ export class UsersService {
     return this.userModel.findById(id).exec();
   }
 
-  // Registrar un usuario nuevo.
-  async crear(dto: CreateUserDto) {
-
+  async validarRegistro(dto: CreateUserDto): Promise<void> {
     // Comprobar que las contraseñas coincidan.
     if (dto.password !== dto.confirmarPassword) {
       throw new BadRequestException('Las contraseñas no coinciden');
@@ -59,27 +58,45 @@ export class UsersService {
         'El email o nombre de usuario ya están registrados'
       );
     }
+  }
+
+  // Registrar un usuario nuevo.
+  async crear(dto: CreateUserDto) {
+    await this.validarRegistro(dto);
 
     // Hashear la contraseña.
     const passwordHash = await bcrypt.hash(dto.password, 10);
 
     // Crear el usuario en MongoDB.
-    const usuario = await this.userModel.create({
-      nombre: dto.nombre,
-      apellido: dto.apellido,
-      email: dto.email.toLowerCase(),
-      username: dto.username,
-      password: passwordHash,
-      fechaNacimiento: new Date(dto.fechaNacimiento),
-      descripcion: dto.descripcion,
-      fotoPerfil: dto.fotoPerfil,
-      perfil: dto.perfil || 'usuario',
-      activo: true
-    });
+    let usuario: UserDocument;
+    try {
+      usuario = await this.userModel.create({
+        nombre: dto.nombre,
+        apellido: dto.apellido,
+        email: dto.email.toLowerCase(),
+        username: dto.username,
+        password: passwordHash,
+        fechaNacimiento: new Date(dto.fechaNacimiento),
+        descripcion: dto.descripcion,
+        fotoPerfil: dto.fotoPerfil,
+        perfil: 'usuario',
+        activo: true
+      });
+    } catch (error: unknown) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'code' in error &&
+        error.code === 11000
+      ) {
+        throw new ConflictException(
+          'El email o nombre de usuario ya están registrados'
+        );
+      }
 
-    // No devolver la contraseña en la respuesta.
-    const { password, ...usuarioSeguro } = usuario.toObject();
+      throw error;
+    }
 
-    return usuarioSeguro;
+    return serializePublicUser(usuario);
   }
 }

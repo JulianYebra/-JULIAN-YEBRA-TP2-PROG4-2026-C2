@@ -158,3 +158,171 @@ nav a:hover {
     font-size: 21px;
   }
 }
+
+/* Sección de mis publicaciones */
+.mis-publicaciones {
+  margin-top: 35px;
+}
+
+.mis-publicaciones h3 {
+  color: #29496f;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* Tarjeta individual */
+.publicacion-perfil {
+  background: white;
+  padding: 22px;
+  margin-bottom: 20px;
+  border: 1px solid #e5ebf4;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(40, 60, 90, 0.07);
+}
+
+/* Título */
+.publicacion-perfil h4 {
+  color: #29496f;
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+/* Descripción */
+.publicacion-perfil p {
+  color: #596a80;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Imagen */
+.publicacion-perfil img {
+  display: block;
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background: #f4f7fc;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+/* Contador de Me gusta */
+.publicacion-perfil .likes-perfil {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+  .publicacion-perfil {
+    padding: 16px;
+  }
+
+  .publicacion-perfil img {
+    max-height: 280px;
+  }
+}
+
+/* Sección de comentarios */
+.comentarios {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #dce4ef;
+}
+
+.comentarios h5 {
+  color: #29496f;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.comentario {
+  background: #f1f5fb;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.comentario strong {
+  color: #315783;
+  font-size: 14px;
+}
+
+.comentario p {
+  color: #435570;
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  max-height: 4.5em;
+  resize: none;
+  min-height: 85px;
+}
+.comentario small {
+  color: #8290a3;
+  font-size: 12px;
+}
+
+.sin-comentarios {
+  color: #8290a3;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Formulario para comentar */
+.formulario-comentario {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  align-items: stretch;
+}
+
+.formulario-comentario textarea {
+  flex: 1;
+  resize: vertical;
+  min-height: 45px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #ccd6e3;
+  border-radius: 9px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.formulario-comentario textarea:focus {
+  outline: none;
+  border-color: #426b9e;
+}
+
+.formulario-comentario button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #426b9e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.formulario-comentario button:hover:not(:disabled) {
+  background: #315783;
+}
+
+.formulario-comentario button:disabled {
+  background: #aab8c9;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .formulario-comentario {
+    flex-direction: column;
+  }
+}

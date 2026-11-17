@@ -1,0 +1,136 @@
+/* Tarjeta de publicación */
+.publicacion {
+  background: #ffffff;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 16px;
+  border: 1px solid #e5ebf4;
+  box-shadow: 0 4px 16px rgba(40, 60, 90, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.publicacion:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(40, 60, 90, 0.12);
+}
+
+/* Título */
+.publicacion h3 {
+  margin: 0 0 12px;
+  color: #29496f;
+  font-size: 21px;
+}
+
+/* Descripción */
+.publicacion p {
+  color: #596a80;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Imagen */
+.publicacion img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  background: #f4f7fc;
+  border-radius: 12px;
+  margin: 15px 0;
+}
+
+/* Botones */
+.publicacion button {
+  border: none;
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  background: #fff0f0;
+  color: #c04d58;
+  margin-top: 12px;
+}
+
+.publicacion button:hover {
+  background: #fbdada;
+}
+
+/* Confirmación de eliminación */
+.confirmacion-eliminar {
+  margin-top: 18px;
+  padding: 18px;
+  background: #fff7f7;
+  border: 1px solid #f2d0d0;
+  border-radius: 12px;
+}
+
+.confirmacion-eliminar p {
+  color: #87464c;
+  font-weight: 600;
+  margin: 0 0 15px;
+}
+
+.acciones-confirmacion {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.acciones-confirmacion .btn-confirmar {
+  background: #c94f5b;
+  color: white;
+}
+
+.acciones-confirmacion .btn-confirmar:hover {
+  background: #a83d49;
+}
+
+.acciones-confirmacion .btn-cancelar {
+  background: #e8edf4;
+  color: #435570;
+}
+
+.acciones-confirmacion .btn-cancelar:hover {
+  background: #d8e0eb;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+  .publicacion {
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+
+  .publicacion img {
+    max-height: 300px;
+  }
+}
+
+/* Botón Me gusta */
+.publicacion .btn-like {
+  background: #e8f1ff;
+  color: #426b9e;
+  margin-right: 10px;
+}
+
+.publicacion .btn-like:hover {
+  background: #d5e5fa;
+}
+
+.publicacion .btn-like.activo {
+  background: #dce9ff;
+  color: #315a91;
+}
+
+/* Contador de Me gusta */
+.publicacion .contador-likes {
+  display: inline-block;
+  margin: 12px 0;
+  color: #718096;
+  font-size: 14px;
+}

@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { Auth } from '../../services/auth';
+import { esPasswordValida, MENSAJE_PASSWORD_INVALIDA } from '../../utils/validaciones';
 
 @Component({
   selector: 'app-registro',
@@ -21,7 +22,6 @@ export class Registro {
   confirmarPassword: string = '';
   fechaNacimiento: string = '';
   descripcion: string = '';
-  perfil: string = 'usuario';
   fotoPerfil: File | null = null;
 
   mensajeError: string = '';
@@ -97,12 +97,8 @@ export class Registro {
       return;
     }
 
-    const passwordValida =
-      /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-
-    if (!passwordValida.test(this.password)) {
-      this.mensajeError =
-        'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número';
+    if (!esPasswordValida(this.password)) {
+      this.mensajeError = MENSAJE_PASSWORD_INVALIDA;
       return;
     }
 
@@ -141,7 +137,6 @@ export class Registro {
     datos.append('confirmarPassword', this.confirmarPassword);
     datos.append('fechaNacimiento', this.fechaNacimiento);
     datos.append('descripcion', this.descripcion.trim());
-    datos.append('perfil', this.perfil);
     if (this.fotoPerfil) {
       datos.append('fotoPerfil', this.fotoPerfil);
     }

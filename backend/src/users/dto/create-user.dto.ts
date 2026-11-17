@@ -7,8 +7,7 @@ import {
   IsDate,
   IsOptional,
   Matches,
-  MaxDate,
-  IsIn
+  MaxDate
 } from 'class-validator';
 
 import { Transform, Type } from 'class-transformer';
@@ -68,10 +67,4 @@ export class CreateUserDto {
   @IsOptional()
   @IsString()
   fotoPerfil?: string;
-
-    @IsOptional()
-  @IsIn(['usuario', 'administrador'], {
-    message: 'El perfil debe ser usuario o administrador'
-  })
-  perfil?: string;
 }

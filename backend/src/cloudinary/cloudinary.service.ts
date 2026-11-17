@@ -43,4 +43,29 @@ export class CloudinaryService {
       stream.end(buffer);
     });
   }
+
+  async subirImagenPublicacion(buffer: Buffer): Promise<string> {
+    return new Promise((resolve, reject) => {
+
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'red-social/publicaciones',
+          resource_type: 'image'
+        },
+        (error, resultado) => {
+          if (error) {
+            return reject(error);
+          }
+
+          if (!resultado) {
+            return reject(new Error('No se pudo subir la imagen'));
+          }
+
+          resolve(resultado.secure_url);
+        }
+      );
+
+      stream.end(buffer);
+    });
+  }
 }
