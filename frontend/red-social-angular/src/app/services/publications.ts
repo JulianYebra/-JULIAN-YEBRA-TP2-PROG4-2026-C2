@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class Publications {
 
-  private readonly apiUrl = 'http://localhost:3000/publications';
+  private readonly apiUrl = 'https://julian-yebra-tp2-prog4-2026-c2.onrender.com/publications';
 
   constructor(
     private readonly http: HttpClient
