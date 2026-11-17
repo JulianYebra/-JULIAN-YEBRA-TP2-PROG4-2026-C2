@@ -32,4 +32,14 @@ export class Publicacion {
     });
   }
 
+  get esAutor(): boolean {
+  const idAutor = this.publicacion?.autor?._id
+    ?? this.publicacion?.autor?.id
+    ?? this.publicacion?.autor;
+
+  const idUsuario = this.usuario?.id
+    ?? this.usuario?._id;
+
+  return String(idAutor) === String(idUsuario);
+}
 }
