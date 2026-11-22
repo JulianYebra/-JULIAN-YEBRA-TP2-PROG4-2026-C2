@@ -6,6 +6,7 @@ import { PublicationsController } from './publications.controller';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 import {Publication,PublicationSchema} from './publication.schema';
 import { UsersModule } from '../users/users.module';
+import { CommentsController } from './comments.controller';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { UsersModule } from '../users/users.module';
   UsersModule
   ],
   providers: [PublicationsService],
-  controllers: [PublicationsController]
+  controllers: [PublicationsController,CommentsController]
 })
 export class PublicationsModule {}

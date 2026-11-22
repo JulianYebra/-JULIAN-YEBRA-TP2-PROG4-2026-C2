@@ -19,6 +19,9 @@ export class Comentario {
 
   @Prop({ default: Date.now })
   createdAt: Date;
+
+  @Prop({ default: false })
+  modificado: boolean;
 }
 
 export const ComentarioSchema =

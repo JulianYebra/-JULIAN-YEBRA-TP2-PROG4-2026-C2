@@ -21,7 +21,7 @@ import { PublicationsService } from './publications.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { UsersService } from '../users/users.service';
-import { CreateCommentDto } from './dto/create-comment.dto';
+
 
 @Controller('publications')
 export class PublicationsController {
@@ -116,20 +116,6 @@ export class PublicationsController {
       usuarioId
     );
   }
-
-  // Agregar un comentario a una publicación.
-@Post(':publicacionId/comentarios/:usuarioId')
-async comentar(
-  @Param('publicacionId') publicacionId: string,
-  @Param('usuarioId') usuarioId: string,
-  @Body() dto: CreateCommentDto
-) {
-  return this.publicationsService.comentar(
-    publicacionId,
-    usuarioId,
-    dto
-  );
-}
 
   @Delete(':publicacionId/likes/:usuarioId')
   async quitarLike(
