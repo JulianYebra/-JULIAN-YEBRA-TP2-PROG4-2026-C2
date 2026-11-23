@@ -2,13 +2,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Publications {
 
-  private readonly apiUrl = 'https://julian-yebra-tp2-prog4-2026-c2.onrender.com/publications';
+  private readonly apiUrl = `${environment.apiBaseUrl}/publications`;
 
   constructor(
     private readonly http: HttpClient
