@@ -74,4 +74,16 @@ export class AuthController {
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
+
+  @Post('autorizar')
+  @HttpCode(200)
+  async autorizar(@Body('token') token: string) {
+    return this.authService.autorizar(token);
+  }
+
+  @Post('refrescar')
+  @HttpCode(200)
+  async refrescar(@Body('token') token: string) {
+    return this.authService.refrescar(token);
+  }
 }

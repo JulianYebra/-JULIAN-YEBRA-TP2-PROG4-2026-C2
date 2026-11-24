@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-publicacion',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './publicacion.html',
   styleUrl: './publicacion.css'
 })
@@ -32,4 +33,14 @@ export class Publicacion {
     });
   }
 
+  get esAutor(): boolean {
+  const idAutor = this.publicacion?.autor?._id
+    ?? this.publicacion?.autor?.id
+    ?? this.publicacion?.autor;
+
+  const idUsuario = this.usuario?.id
+    ?? this.usuario?._id;
+
+  return String(idAutor) === String(idUsuario);
+}
 }

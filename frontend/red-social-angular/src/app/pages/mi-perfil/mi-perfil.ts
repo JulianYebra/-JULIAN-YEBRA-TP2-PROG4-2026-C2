@@ -4,6 +4,7 @@ import { Publications } from '../../services/publications';
 import { Auth } from '../../services/auth';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -13,6 +14,7 @@ import { DatePipe } from '@angular/common';
 })
 export class MiPerfil implements OnInit {
 
+  readonly apiBaseUrl = environment.apiBaseUrl;
   usuario: any = history.state?.usuario ?? null;
 
   publicaciones: any[] = [];

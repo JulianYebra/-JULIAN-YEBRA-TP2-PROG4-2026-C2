@@ -120,6 +120,56 @@ import { CreateCommentDto } from './dto/create-comment.dto';
     }
 
 
+  // Buscar una publicación por su ID.
+  async buscarPorId(publicacionId: string) {
+      if (!Types.ObjectId.isValid(publicacionId)) {
+        throw new NotFoundException('ID de publicación inválido');
+      }
+
+      const publicaciones = await this.publicationModel.aggregate([
+        {
+          $match: {
+            _id: new Types.ObjectId(publicacionId),
+            activa: true
+          }
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'autor',
+            foreignField: '_id',
+            as: 'datosAutor'
+          }
+        },
+        {
+          $unwind: '$datosAutor'
+        },
+        {
+          $project: {
+            titulo: 1,
+            descripcion: 1,
+            imagen: 1,
+            likes: 1,
+            comentarios: 1,
+            createdAt: 1,
+            autor: {
+              _id: '$datosAutor._id',
+              nombre: '$datosAutor.nombre',
+              apellido: '$datosAutor.apellido',
+              username: '$datosAutor.username',
+              fotoPerfil: '$datosAutor.fotoPerfil'
+            }
+          }
+        }
+      ]);
+
+      if (publicaciones.length === 0) {
+        throw new NotFoundException('La publicación no existe');
+      }
+
+      return publicaciones[0];
+    }  
+
   async darLike(publicacionId: string, usuarioId: string) {
     if (
       !Types.ObjectId.isValid(publicacionId) ||
@@ -270,4 +320,126 @@ async comentar(
   return publicacion;
 }
 
+async editarComentario(
+  publicacionId: string,
+  comentarioId: string,
+  usuarioId: string,
+  dto: CreateCommentDto
+) {
+  if (
+    !Types.ObjectId.isValid(publicacionId) ||
+    !Types.ObjectId.isValid(comentarioId) ||
+    !Types.ObjectId.isValid(usuarioId)
+  ) {
+    throw new NotFoundException('ID inválido');
+  }
+
+  const usuario = await this.usersService.buscarPorId(usuarioId);
+
+  if (!usuario || !usuario.activo) {
+    throw new NotFoundException('El usuario no existe o está inactivo');
+  }
+
+  const publicacion = await this.publicationModel.findOne({
+    _id: publicacionId,
+    activa: true
+  });
+
+  if (!publicacion) {
+    throw new NotFoundException('La publicación no existe');
+  }
+
+  const comentario = publicacion.comentarios.find(
+    (c: any) => c._id.toString() === comentarioId
+  );
+
+  if (!comentario) {
+    throw new NotFoundException('El comentario no existe');
+  }
+
+  if (comentario.autor.toString() !== usuarioId) {
+    throw new ForbiddenException(
+      'No tenés permisos para editar este comentario'
+    );
+  }
+
+  comentario.texto = dto.texto.trim();
+  comentario.modificado = true;
+
+  await publicacion.save();
+
+  return comentario;
+}
+
+// Listar comentarios de una publicación.
+async listarComentarios(
+  publicacionId: string,
+  offset: number = 0,
+  limit: number = 10
+) {
+  if (!Types.ObjectId.isValid(publicacionId)) {
+    throw new NotFoundException('ID de publicación inválido');
+  }
+
+  const existe = await this.publicationModel.exists({
+    _id: publicacionId,
+    activa: true
+  });
+
+  if (!existe) {
+    throw new NotFoundException('La publicación no existe');
+  }
+
+  return this.publicationModel.aggregate([
+    {
+      $match: {
+        _id: new Types.ObjectId(publicacionId),
+        activa: true
+      }
+    },
+    {
+      $unwind: '$comentarios'
+    },
+    {
+      $sort: {
+        'comentarios.createdAt': -1
+      }
+    },
+    {
+      $skip: offset
+    },
+    {
+      $limit: limit
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'comentarios.autor',
+        foreignField: '_id',
+        as: 'autorComentario'
+      }
+    },
+    {//convierte cada comentario en un resultado individual.
+      $unwind: {
+        path: '$autorComentario',
+        preserveNullAndEmptyArrays: true
+      }
+    },
+    {
+      $project: {
+        _id: '$comentarios._id',
+        texto: '$comentarios.texto',
+        createdAt: '$comentarios.createdAt',
+        modificado: '$comentarios.modificado',
+        autor: {
+          _id: '$autorComentario._id',
+          nombre: '$autorComentario.nombre',
+          apellido: '$autorComentario.apellido',
+          username: '$autorComentario.username',
+          fotoPerfil: '$autorComentario.fotoPerfil'
+        }
+      }
+    }
+  ]);
+}
 }

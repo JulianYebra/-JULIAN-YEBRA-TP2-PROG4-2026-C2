@@ -39,11 +39,17 @@
     Me gusta
   </p>
 
+  <a
+  [routerLink]="['/publicaciones', publicacion._id]"
+  class="btn-ver-detalle"
+>
+  Ver publicación y comentarios
+</a>
+
   <!-- Eliminar publicación -->
   @if (
     usuario &&
-    (usuario.id === (publicacion.autor?._id ?? publicacion.autor?.id) ||
-    usuario.perfil === 'administrador')
+    (esAutor || usuario.perfil === 'administrador')
   ) {
 
     @if (!publicacionAEliminar) {

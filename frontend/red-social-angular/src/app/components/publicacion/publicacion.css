@@ -42,80 +42,27 @@
   margin: 15px 0;
 }
 
-/* Botones */
-.publicacion button {
+
+/* Botones y enlace */
+.publicacion button,
+.publicacion .btn-ver-detalle {
+  display: inline-block;
+  margin: 10px 14px 10px 0;
+  padding: 11px 18px;
   border: none;
   border-radius: 9px;
-  padding: 11px 18px;
   font-size: 14px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
+  vertical-align: middle;
   transition: background 0.2s, transform 0.2s;
-  background: #fff0f0;
-  color: #c04d58;
-  margin-top: 12px;
-}
-
-.publicacion button:hover {
-  background: #fbdada;
-}
-
-/* Confirmación de eliminación */
-.confirmacion-eliminar {
-  margin-top: 18px;
-  padding: 18px;
-  background: #fff7f7;
-  border: 1px solid #f2d0d0;
-  border-radius: 12px;
-}
-
-.confirmacion-eliminar p {
-  color: #87464c;
-  font-weight: 600;
-  margin: 0 0 15px;
-}
-
-.acciones-confirmacion {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.acciones-confirmacion .btn-confirmar {
-  background: #c94f5b;
-  color: white;
-}
-
-.acciones-confirmacion .btn-confirmar:hover {
-  background: #a83d49;
-}
-
-.acciones-confirmacion .btn-cancelar {
-  background: #e8edf4;
-  color: #435570;
-}
-
-.acciones-confirmacion .btn-cancelar:hover {
-  background: #d8e0eb;
-}
-
-/* Adaptación a celulares */
-@media (max-width: 600px) {
-  .publicacion {
-    padding: 18px;
-    margin-bottom: 20px;
-  }
-
-  .publicacion img {
-    max-height: 300px;
-  }
 }
 
 /* Botón Me gusta */
 .publicacion .btn-like {
   background: #e8f1ff;
   color: #426b9e;
-  margin-right: 10px;
 }
 
 .publicacion .btn-like:hover {
@@ -127,10 +74,51 @@
   color: #315a91;
 }
 
-/* Contador de Me gusta */
+/* Botón eliminar */
+.publicacion .btn-eliminar {
+  background: #fff0f0;
+  color: #c04d58;
+}
+
+.publicacion .btn-eliminar:hover {
+  background: #fbdada;
+}
+
+/* Botón ver detalle */
+.publicacion .btn-ver-detalle {
+  background: #315783;
+  color: white;
+}
+
+.publicacion .btn-ver-detalle:hover {
+  background: #2c4ca4;
+}
+
+/* Contador de likes */
 .publicacion .contador-likes {
   display: inline-block;
-  margin: 12px 0;
+  margin: 10px 14px 10px 0;
   color: #718096;
   font-size: 14px;
+  vertical-align: middle;
 }
+
+/* Botón Ver publicación y comentarios */
+.btn-ver-detalle {
+  display: inline-block;
+  margin: 8px 0;
+  padding: 11px 18px;
+  background-color: #315783;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-ver-detalle:hover {
+  background-color: #2c4ca4;
+  transform: translateY(-1px);
+}
+

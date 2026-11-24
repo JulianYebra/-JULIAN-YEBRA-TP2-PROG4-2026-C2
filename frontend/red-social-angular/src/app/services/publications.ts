@@ -2,13 +2,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Publications {
 
-  private readonly apiUrl = 'https://julian-yebra-tp2-prog4-2026-c2.onrender.com/publications';
+  private readonly apiUrl = `${environment.apiBaseUrl}/publications`;
 
   constructor(
     private readonly http: HttpClient
@@ -34,6 +35,10 @@ export class Publications {
     return this.http.get(this.apiUrl, { params });
   }
 
+  // Obtener una publicación por su ID.
+  obtenerPorId(publicacionId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${publicacionId}`);
+  }
 
   // Crear una publicación.
   crear(autorId: string, datos: FormData): Observable<any> {
@@ -66,6 +71,36 @@ export class Publications {
   ): Observable<any> {
     return this.http.post(
       `${this.apiUrl}/${publicacionId}/comentarios/${usuarioId}`,
+      { texto }
+    );
+  }
+
+  // Obtener los comentarios de una publicación.
+  listarComentarios(
+    publicacionId: string,
+    offset: number = 0,
+    limit: number = 10
+  ): Observable<any> {
+
+    const params = new HttpParams()
+      .set('offset', offset)
+      .set('limit', limit);
+
+    return this.http.get(
+      `${this.apiUrl}/${publicacionId}/comentarios`,
+      { params }
+    );
+  }
+
+  editarComentario(
+    publicacionId: string,
+    comentarioId: string,
+    usuarioId: string,
+    texto: string
+  ): Observable<any> {
+
+    return this.http.put(
+      `${this.apiUrl}/${publicacionId}/comentarios/${comentarioId}/${usuarioId}`,
       { texto }
     );
   }
