@@ -1,0 +1,354 @@
+
+/* Fondo general */
+.detalle-container {
+  min-height: 100vh;
+  background: #f4f7fc;
+  color: #263449;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Encabezado */
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #dedeee;
+  box-shadow: 0 4px 15px rgba(76, 81, 130, 0.08);
+}
+
+.encabezado h1 {
+  margin: 0;
+  color: #34345c;
+  font-size: 25px;
+}
+
+/* Navegación */
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: #77778f;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #7771cc;
+}
+
+/* Contenido principal */
+.contenido {
+  width: 90%;
+  max-width: 850px;
+  margin: 35px auto;
+}
+
+.contenido h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #243b5a;
+}
+
+/* Volver a publicaciones */
+.volver {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: #426b9e;
+  color: white;
+  text-decoration: none;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.volver:hover {
+  background: #315783;
+  transform: translateY(-1px);
+}
+
+/* Tarjeta de publicación */
+.publicacion {
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(40, 60, 90, 0.08);
+  border: 1px solid #e5ebf4;
+}
+
+/* Datos del autor */
+.datos-autor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.datos-autor img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.datos-autor strong {
+  color: #29496f;
+}
+
+.datos-autor p {
+  margin: 4px 0 0;
+  color: #77778f;
+  font-size: 14px;
+}
+
+/* Título y descripción */
+.publicacion h3 {
+  margin-bottom: 12px;
+  color: #29496f;
+  font-size: 21px;
+}
+
+.publicacion > p {
+  color: #435570;
+  line-height: 1.6;
+}
+
+/* Imagen */
+.imagen-publicacion {
+  display: block;
+  width: 100%;
+  max-height: 450px;
+  margin-top: 15px;
+  border-radius: 9px;
+  object-fit: contain;
+}
+
+/* Likes y fecha */
+.contador-likes {
+  font-weight: 600;
+  color: #426b9e;
+}
+
+.fecha {
+  color: #77778f !important;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+/* Mensaje de error */
+.mensaje-error {
+  padding: 12px;
+  color: #b91c1c;
+  background-color: #fee2e2;
+  border-radius: 8px;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 600px) {
+  .encabezado {
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  nav {
+    gap: 20px;
+  }
+
+  .contenido {
+    width: 92%;
+    margin: 22px auto;
+  }
+
+  .contenido h2 {
+    font-size: 25px;
+  }
+
+  .publicacion {
+    padding: 18px;
+  }
+}
+
+/* Formulario de comentarios */
+.formulario-comentario {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5ebf4;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(40, 60, 90, 0.05);
+}
+
+.formulario-comentario textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #d8e1ed;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  background: #fbfcff;
+  color: #263449;
+}
+
+.formulario-comentario textarea:focus {
+  outline: none;
+  border-color: #7da9dc;
+  box-shadow: 0 0 0 3px rgba(125, 169, 220, 0.15);
+}
+
+.formulario-comentario button {
+  align-self: flex-start;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #426b9e;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.formulario-comentario button:hover:not(:disabled) {
+  background: #315783;
+}
+
+.formulario-comentario button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Sección de comentarios */
+.seccion-comentarios {
+  margin-top: 30px;
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #e5ebf4;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(40, 60, 90, 0.07);
+}
+
+.seccion-comentarios h3 {
+  color: #29496f;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Comentario individual */
+.comentario {
+  padding: 18px 0;
+  border-bottom: 1px solid #e5ebf4;
+}
+
+.datos-comentario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.datos-comentario strong {
+  color: #29496f;
+}
+
+.datos-comentario span {
+  color: #8995a6;
+  font-size: 13px;
+}
+
+.comentario p {
+  color: #596a80;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.comentario-modificado {
+  display: inline-block;
+  color: #8995a6;
+  font-style: italic;
+  font-size: 12px;
+  margin-right: 12px;
+}
+
+/* Botones de edición */
+.btn-editar-comentario,
+.btn-guardar,
+.btn-cancelar-edicion {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-editar-comentario,
+.btn-guardar {
+  background: #426b9e;
+  color: white;
+}
+
+.btn-editar-comentario:hover,
+.btn-guardar:hover {
+  background: #315783;
+}
+
+.btn-cancelar-edicion {
+  background: #e8edf4;
+  color: #435570;
+}
+
+.acciones-edicion {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.formulario-edicion textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #d8e1ed;
+  border-radius: 9px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* Botón cargar más comentarios */
+.contenedor-cargar-mas {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.contenedor-cargar-mas button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #426b9e;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.contenedor-cargar-mas button:hover:not(:disabled) {
+  background: #315783;
+  transform: translateY(-1px);
+}
+
+.contenedor-cargar-mas button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

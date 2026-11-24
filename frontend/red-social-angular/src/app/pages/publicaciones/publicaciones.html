@@ -92,8 +92,10 @@
 }
 
     @if (cargando) {
-
-  <p>Cargando publicaciones...</p>
+      <div class="contenedor-carga" role="status" aria-label="Cargando publicaciones">
+        <div class="spinner-carga"></div>
+        <p>Cargando publicaciones...</p>
+      </div>
 
 } @else if (error) {
 

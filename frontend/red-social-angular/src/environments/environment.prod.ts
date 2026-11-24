@@ -3,5 +3,6 @@ export const environment = {
 };
 
 export const timeSesion = {
-  DEFAULT: 5 * 60 * 1000
+  DEFAULT: 15 * 60 * 1000,
+  AVISO: 5 * 60 * 1000
 };

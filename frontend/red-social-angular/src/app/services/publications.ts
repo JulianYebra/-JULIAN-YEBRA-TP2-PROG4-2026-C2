@@ -35,6 +35,10 @@ export class Publications {
     return this.http.get(this.apiUrl, { params });
   }
 
+  // Obtener una publicación por su ID.
+  obtenerPorId(publicacionId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${publicacionId}`);
+  }
 
   // Crear una publicación.
   crear(autorId: string, datos: FormData): Observable<any> {
@@ -67,6 +71,36 @@ export class Publications {
   ): Observable<any> {
     return this.http.post(
       `${this.apiUrl}/${publicacionId}/comentarios/${usuarioId}`,
+      { texto }
+    );
+  }
+
+  // Obtener los comentarios de una publicación.
+  listarComentarios(
+    publicacionId: string,
+    offset: number = 0,
+    limit: number = 10
+  ): Observable<any> {
+
+    const params = new HttpParams()
+      .set('offset', offset)
+      .set('limit', limit);
+
+    return this.http.get(
+      `${this.apiUrl}/${publicacionId}/comentarios`,
+      { params }
+    );
+  }
+
+  editarComentario(
+    publicacionId: string,
+    comentarioId: string,
+    usuarioId: string,
+    texto: string
+  ): Observable<any> {
+
+    return this.http.put(
+      `${this.apiUrl}/${publicacionId}/comentarios/${comentarioId}/${usuarioId}`,
       { texto }
     );
   }

@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
   imports: [RouterOutlet, CommonModule],
   template: `
     <div *ngIf="cargando" class="pantalla-carga">
+      <div class="spinner-carga" role="status" aria-label="Cargando"></div>
       <p>Verificando sesión...</p>
     </div>
 

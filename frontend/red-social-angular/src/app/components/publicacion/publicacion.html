@@ -39,6 +39,13 @@
     Me gusta
   </p>
 
+  <a
+  [routerLink]="['/publicaciones', publicacion._id]"
+  class="btn-ver-detalle"
+>
+  Ver publicación y comentarios
+</a>
+
   <!-- Eliminar publicación -->
   @if (
     usuario &&

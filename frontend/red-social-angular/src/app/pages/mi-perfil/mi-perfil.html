@@ -14,7 +14,10 @@
     <h2>Mi perfil</h2>
 
     @if (cargandoUsuario) {
-      <p>Actualizando los datos del perfil...</p>
+      <div class="contenedor-carga" role="status" aria-label="Actualizando perfil">
+        <div class="spinner-carga"></div>
+        <p>Actualizando los datos del perfil...</p>
+      </div>
     }
 
     @if (errorUsuario) {
@@ -75,8 +78,10 @@
         <h3>Mis últimas publicaciones</h3>
 
         @if (cargando) {
-
-          <p>Cargando tus publicaciones...</p>
+          <div class="contenedor-carga" role="status" aria-label="Cargando tus publicaciones">
+            <div class="spinner-carga"></div>
+            <p>Cargando tus publicaciones...</p>
+          </div>
 
         } @else if (error) {
 

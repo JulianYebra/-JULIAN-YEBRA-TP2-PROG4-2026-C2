@@ -1,0 +1,16 @@
+.pantalla-carga {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #f4f7fc;
+  color: #435570;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pantalla-carga p {
+  margin: 0;
+  font-weight: 600;
+}

@@ -1,0 +1,213 @@
+<div class="detalle-container">
+
+  <header class="encabezado">
+    <h1>Red Social</h1>
+
+    <nav>
+      <a routerLink="/publicaciones">Publicaciones</a>
+      <a routerLink="/mi-perfil">Mi perfil</a>
+    </nav>
+  </header>
+
+  <main class="contenido">
+
+    <a routerLink="/publicaciones" class="volver">
+      ← Volver a publicaciones
+    </a>
+
+    <h2>Detalle de publicación</h2>
+
+    @if (cargando) {
+      <div class="contenedor-carga" role="status" aria-label="Cargando publicación">
+        <div class="spinner-carga"></div>
+        <p>Cargando publicación...</p>
+      </div>
+
+    } @else if (error) {
+
+      <p class="mensaje-error">{{ error }}</p>
+
+    } @else if (publicacion) {
+
+      <article class="publicacion">
+
+        <div class="datos-autor">
+
+          @if (publicacion.autor?.fotoPerfil) {
+            <img
+              [src]="publicacion.autor.fotoPerfil"
+              alt="Foto de perfil del autor"
+            >
+          }
+
+          <div>
+            <strong>
+              {{ publicacion.autor?.nombre }}
+              {{ publicacion.autor?.apellido }}
+            </strong>
+
+            <p>@{{ publicacion.autor?.username }}</p>
+          </div>
+
+        </div>
+
+        <h3>{{ publicacion.titulo }}</h3>
+
+        <p>{{ publicacion.descripcion }}</p>
+
+        @if (publicacion.imagen) {
+          <img
+            class="imagen-publicacion"
+            [src]="publicacion.imagen"
+            alt="Imagen de la publicación"
+          >
+        }
+
+        <p class="contador-likes">
+          {{ publicacion.likes?.length ?? 0 }} Me gusta
+        </p>
+
+        <p class="fecha">
+          {{ publicacion.createdAt | date:'dd/MM/yyyy HH:mm' }}
+        </p>
+
+      </article>
+
+      <!-- Sección de comentarios -->
+    <section class="seccion-comentarios">
+
+    <h3>Comentarios</h3>
+
+    <!-- Formulario para agregar un comentario -->
+    <form class="formulario-comentario" (ngSubmit)="agregarComentario()">
+
+    <textarea
+        name="nuevoComentario"
+        [(ngModel)]="nuevoComentario"
+        placeholder="Escribí un comentario..."
+        rows="3"
+        required
+    ></textarea>
+
+    @if (errorNuevoComentario) {
+        <p class="mensaje-error">{{ errorNuevoComentario }}</p>
+    }
+
+    <button
+        type="submit"
+        [disabled]="enviandoComentario || !nuevoComentario.trim()"
+    >
+        {{ enviandoComentario ? 'Publicando...' : 'Comentar' }}
+    </button>
+
+    </form>
+
+    @if (cargandoComentarios) {
+        <div class="contenedor-carga" role="status" aria-label="Cargando comentarios">
+          <div class="spinner-carga"></div>
+          <p>Cargando comentarios...</p>
+        </div>
+    } @else if (errorComentarios) {
+        <p class="mensaje-error">{{ errorComentarios }}</p>
+    } @else if (comentarios.length === 0) {
+        <p class="sin-comentarios">
+        Todavía no hay comentarios. ¡Sé el primero en comentar!
+        </p>
+    } @else {
+        @for (comentario of comentarios; track comentario._id) {
+        <article class="comentario">
+
+            <div class="datos-comentario">
+            <strong>
+                {{ comentario.autor?.nombre }}
+                {{ comentario.autor?.apellido }}
+            </strong>
+
+            <span>
+                @{{ comentario.autor?.username }}
+            </span>
+            </div>
+
+            @if (comentarioEditando === comentario._id) {
+
+        <!-- Formulario de edición -->
+        <div class="formulario-edicion">
+
+            <textarea
+            [(ngModel)]="textoEditado"
+            name="textoEditado"
+            rows="3"
+            ></textarea>
+
+            @if (errorEdicion) {
+            <p class="mensaje-error">{{ errorEdicion }}</p>
+            }
+
+            <div class="acciones-edicion">
+            <button
+                type="button"
+                class="btn-guardar"
+                [disabled]="guardandoEdicion || !textoEditado.trim()"
+                (click)="guardarEdicion(comentario)"
+            >
+                {{ guardandoEdicion ? 'Guardando...' : 'Guardar cambios' }}
+            </button>
+
+            <button
+                type="button"
+                class="btn-cancelar-edicion"
+                (click)="cancelarEdicion()"
+            >
+                Cancelar
+            </button>
+            </div>
+
+        </div>
+
+        } @else {
+
+        <p>{{ comentario.texto }}</p>
+
+        @if (comentario.modificado) {
+            <small class="comentario-modificado">Modificado</small>
+        }
+
+        @if (
+            (comentario.autor?._id ?? comentario.autor?.id ?? comentario.autor)
+            === (usuario?.id ?? usuario?._id)
+        ) {
+            <button
+            type="button"
+            class="btn-editar-comentario"
+            (click)="iniciarEdicion(comentario)"
+            >
+            Editar
+            </button>
+        }
+
+        }
+
+        </article>
+        }
+    }
+
+    <!-- Botón para cargar más comentarios -->
+    @if (hayMasComentarios && comentarios.length > 0) {
+    <div class="contenedor-cargar-mas">
+        <button
+        type="button"
+        (click)="cargarMasComentarios()"
+        [disabled]="cargandoComentarios"
+        >
+        {{ cargandoComentarios ? 'Cargando...' : 'Cargar más comentarios' }}
+        </button>
+    </div>
+    }
+
+</section>
+
+    }
+
+  </main>
+
+</div>
