@@ -120,6 +120,56 @@ import { CreateCommentDto } from './dto/create-comment.dto';
     }
 
 
+  // Buscar una publicación por su ID.
+  async buscarPorId(publicacionId: string) {
+      if (!Types.ObjectId.isValid(publicacionId)) {
+        throw new NotFoundException('ID de publicación inválido');
+      }
+
+      const publicaciones = await this.publicationModel.aggregate([
+        {
+          $match: {
+            _id: new Types.ObjectId(publicacionId),
+            activa: true
+          }
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'autor',
+            foreignField: '_id',
+            as: 'datosAutor'
+          }
+        },
+        {
+          $unwind: '$datosAutor'
+        },
+        {
+          $project: {
+            titulo: 1,
+            descripcion: 1,
+            imagen: 1,
+            likes: 1,
+            comentarios: 1,
+            createdAt: 1,
+            autor: {
+              _id: '$datosAutor._id',
+              nombre: '$datosAutor.nombre',
+              apellido: '$datosAutor.apellido',
+              username: '$datosAutor.username',
+              fotoPerfil: '$datosAutor.fotoPerfil'
+            }
+          }
+        }
+      ]);
+
+      if (publicaciones.length === 0) {
+        throw new NotFoundException('La publicación no existe');
+      }
+
+      return publicaciones[0];
+    }  
+
   async darLike(publicacionId: string, usuarioId: string) {
     if (
       !Types.ObjectId.isValid(publicacionId) ||

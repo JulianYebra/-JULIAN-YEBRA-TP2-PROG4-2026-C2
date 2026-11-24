@@ -104,6 +104,13 @@ export class PublicationsController {
     );
   }
 
+  // Obtener una publicación por su ID.
+  @Get(':publicacionId')
+  async buscarPorId(
+    @Param('publicacionId') publicacionId: string
+  ) {
+    return this.publicationsService.buscarPorId(publicacionId);
+  }
 
   // Dar like a una publicación.
   @Post(':publicacionId/likes/:usuarioId')
